@@ -1,5 +1,5 @@
 <?php
-	if(isset($_POST["frmVehicle"])) {
+	if(isset($_POST["frmVehicles"])) {
 		// Do something with the values of selChooseMake, selChooseModel and selChooseBadge.
 	}
 ?>
