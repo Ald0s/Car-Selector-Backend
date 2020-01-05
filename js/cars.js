@@ -1,45 +1,69 @@
-var frmChooseVehicle = null;
-
-function ChooseMake(makeid) {
-	$("#txtMakeID").val(makeid);
+function GetAllMakes() {
+	$("#selChooseMake").empty();
+	$("#selChooseModel").empty();
+	$("#selChooseBadge").empty();
 	
-	frmChooseVehicle.submit();
+	$("#selChooseModel").hide();
+	$("#selChooseBadge").hide();
+	
+	var makes = $("#selChooseMake");
+	makes.append($("<option />").val(-1).text("Choose a make ..."));
+	
+	$.get("query_cars.php", { SELECT: "MAKES" }, function ( data ) {
+		$.each(JSON.parse(data), function () {
+			makes.append($("<option />").val(this.ID).text(this.Name));
+		});
+	});
 }
 
-function ChooseModel(makeid, modelid) {
-	$("#txtMakeID").val(makeid);
-	$("#txtModelID").val(modelid);
+function GetModelsForMake(make) {
+	$("#selChooseModel").empty();
+	$("#selChooseBadge").empty();
 	
-	frmChooseVehicle.submit();
+	$("#selChooseModel").show();
+	$("#selChooseBadge").hide();
+	
+	var models = $("#selChooseModel");
+	models.append($("<option />").val(-1).text("Choose a model ..."));
+	
+	$.get("query_cars.php", { SELECT: "MODELS", MAKEID: make }, function ( data ) {
+		$.each(JSON.parse(data), function () {
+			models.append($("<option />").val(this.ID).text(this.Name));
+		});
+	});
+}
+
+function GetBadgesForModel(model) {
+	$("#selChooseBadge").empty();
+	
+	$("#selChooseModel").show();
+	$("#selChooseBadge").show();
+	
+	var badges = $("#selChooseBadge");
+	badges.append($("<option />").val(-1).text("Choose a badge ..."));
+	
+	$.get("query_cars.php", { SELECT: "BADGES", MODELID: model }, function ( data ) {
+		$.each(JSON.parse(data), function () {
+			badges.append($("<option />").val(this.ID).text(this.Name));
+		});
+	});
 }
 
 $(document).ready(function() {
-	frmChooseVehicle = $("#frmVehicles");
+	// When document ready, get all makes and populate the combobox.
+	GetAllMakes();
 	
 	$("#selChooseMake").change(function() {
 		// Get the target make ID.
 		var makeid = $(this).val();
-		ChooseMake(makeid);
+		
+		GetModelsForMake(makeid);
 	});
 	
 	$("#selChooseModel").change(function() {
 		// Get the target model ID.
 		var modelid = $(this).val();
-		ChooseModel($("#selChooseMake").val(), modelid);
+		
+		GetBadgesForModel(modelid);
 	});
-	
-	var chosenMakeID = $("#selChooseMake").val();
-	var chosenModelID = $("#selChooseModel").val();
-	
-	if(chosenMakeID != "-1") {
-		$("#selChooseModel").show();
-	}else{
-		$("#selChooseModel").hide();
-	}
-	
-	if(chosenModelID != "-1") {
-		$("#selChooseBadge").show();
-	}else{
-		$("#selChooseBadge").hide();
-	}
 });
