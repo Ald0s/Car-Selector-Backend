@@ -1,0 +1,15 @@
+# Useless directories
+venv/
+__pycache__/
+
+# Private dirs
+/instance/
+
+# Database
+*.db
+
+# Compiled python files
+*.pyc
+
+# Other
+runserver.bat
