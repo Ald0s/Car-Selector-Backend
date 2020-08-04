@@ -3,15 +3,15 @@ from os.path import isfile, join
 
 def GetFileContents( file ):
 
-	text = None
-	files = listdir("import")
+    text = None
+    files = listdir("import")
 
-	for x in files:
+    for x in files:
 
-		if isfile(join("import", x)) and x == file:
-			with open(join("import", x), "r") as f:
-				text = f.read()
+        if isfile(join("import", x)) and x == file:
+            with open(join("import", x), "r") as f:
+                text = f.read()
 
-			break
+            break
 
-	return text
+    return text

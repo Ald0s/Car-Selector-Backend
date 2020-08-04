@@ -15,12 +15,12 @@ My data sets for Cars & Bikes are located in /import/
 
  # Locate a particular vehicle by calling Find upon the Class of the target derived type.
 found_vehicles = [
-	Car.Find( "Toyota", "Supra", "SZ" ) 	[0],
-	Bike.Find( "BMW", "S 1000 R" )			[0]
+    Car.Find( "Toyota", "Supra", "SZ" )     [0],
+    Bike.Find( "BMW", "S 1000 R" )          [0]
 ]
 
 for vehicle in found_vehicles:
-	print("{0}, {1}, {2}".format( vehicle[0], vehicle[1], vehicle[2] ))
+    print("{0}, {1}, {2}".format( vehicle[0], vehicle[1], vehicle[2] ))
 
 # Output:
 # <Car 122: Toyota>, <Model 1519: Supra>, <Badge 5661: SZ>
@@ -43,10 +43,10 @@ print("# of Supra badges: " + str(len( toyota_supra_badges )))
 
 # Query base for derived type using an Id.
 x = [
-	Make.GetById( 149 ),
-	Make.GetById( 122 )
+    Make.GetById( 149 ),
+    Make.GetById( 122 )
 ]
-print("#0: {0}\n#1: {1}" .format( str(x[0]), str(x[1])))
+print("#0: {0}\n#1: {1}".format( str(x[0]), str(x[1]) ))
 
 # Output:
 # #0: <Bike 149: BMW>
