@@ -1,4 +1,4 @@
-from app import create_app, config, vehicles
+from app import create_app, vehicles
 from app.models import init_database, SessionLocal
 
 

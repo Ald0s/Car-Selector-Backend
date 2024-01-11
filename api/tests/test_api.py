@@ -4,7 +4,7 @@ import json
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app import config
+from ..app import config
 
 
 class TestQueryVehicles():

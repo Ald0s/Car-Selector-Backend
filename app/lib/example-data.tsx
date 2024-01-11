@@ -1,0 +1,153 @@
+export const testMakesReply = {
+  items: [
+    { uid: "mazda-GANMfBBPNc", name: "Mazda" },
+    { uid: "toyota-VrjdfQNnzY", name: "Toyota" },
+  ],
+  total: 2,
+  page: 1,
+  size: 10,
+  pages: 1,
+};
+
+export const testTypesReply = {
+  items: [{ type_id: "car", name: "Car", description: "A vehicle" }],
+  total: 1,
+  page: 1,
+  size: 10,
+  pages: 1,
+};
+
+export const testModelsReply = {
+  items: [
+    {
+      uid: "6-XGwr6e94Dn",
+      make_uid: "mazda-GANMfBBPNc",
+      name: "6",
+      type: { type_id: "car", name: "Car", description: "A vehicle" },
+    },
+    {
+      uid: "mx-5-gxVoegjdL9",
+      make_uid: "mazda-GANMfBBPNc",
+      name: "MX-5",
+      type: { type_id: "car", name: "Car", description: "A vehicle" },
+    },
+    {
+      uid: "rx-7-3exDTapq5g",
+      make_uid: "mazda-GANMfBBPNc",
+      name: "RX-7",
+      type: { type_id: "car", name: "Car", description: "A vehicle" },
+    },
+  ],
+  total: 3,
+  page: 1,
+  size: 10,
+  pages: 1,
+};
+
+export const testYearModelsReply = {
+  items: [
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 2002 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 2001 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 2000 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1999 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1998 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1997 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1996 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1995 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1994 },
+    { make_uid: "mazda-GANMfBBPNc", model_uid: "rx-7-3exDTapq5g", year: 1993 },
+  ],
+  total: 24,
+  page: 1,
+  size: 10,
+  pages: 3,
+};
+
+export const testVehiclesReply = {
+  items: [
+    {
+      vehicle_uid: "60c87b3ce69840fda91b1b7af0a8f8b2",
+      badge: null,
+      motor_type: "rotary",
+      displacement: 1300,
+      induction: "TT",
+      fuel_type: "P",
+      power: null,
+      elec_type: null,
+      trans_type: "M",
+      num_gears: 5,
+      make: { uid: "mazda-GANMfBBPNc", name: "Mazda" },
+      model: {
+        uid: "rx-7-3exDTapq5g",
+        make_uid: "mazda-GANMfBBPNc",
+        name: "RX-7",
+        type: { type_id: "car", name: "Car", description: "A vehicle" },
+      },
+      year_model_year_: 2000,
+    },
+    {
+      vehicle_uid: "e45a4c406ca6465cb3b52f862795a704",
+      badge: "RS",
+      motor_type: "rotary",
+      displacement: 1300,
+      induction: "TT",
+      fuel_type: "P",
+      power: null,
+      elec_type: null,
+      trans_type: "M",
+      num_gears: 5,
+      make: { uid: "mazda-GANMfBBPNc", name: "Mazda" },
+      model: {
+        uid: "rx-7-3exDTapq5g",
+        make_uid: "mazda-GANMfBBPNc",
+        name: "RX-7",
+        type: { type_id: "car", name: "Car", description: "A vehicle" },
+      },
+      year_model_year_: 2000,
+    },
+    {
+      vehicle_uid: "25c1f1db29194b4cb12a165bf6991902",
+      badge: "RZ",
+      motor_type: "rotary",
+      displacement: 1300,
+      induction: "TT",
+      fuel_type: "P",
+      power: null,
+      elec_type: null,
+      trans_type: "M",
+      num_gears: 5,
+      make: { uid: "mazda-GANMfBBPNc", name: "Mazda" },
+      model: {
+        uid: "rx-7-3exDTapq5g",
+        make_uid: "mazda-GANMfBBPNc",
+        name: "RX-7",
+        type: { type_id: "car", name: "Car", description: "A vehicle" },
+      },
+      year_model_year_: 2000,
+    },
+    {
+      vehicle_uid: "ce1f2ca0ea094d6eabb95ef83d227d6c",
+      badge: "Type R",
+      motor_type: "rotary",
+      displacement: 1300,
+      induction: "TT",
+      fuel_type: "P",
+      power: null,
+      elec_type: null,
+      trans_type: "M",
+      num_gears: 5,
+      make: { uid: "mazda-GANMfBBPNc", name: "Mazda" },
+      model: {
+        uid: "rx-7-3exDTapq5g",
+        make_uid: "mazda-GANMfBBPNc",
+        name: "RX-7",
+        type: { type_id: "car", name: "Car", description: "A vehicle" },
+      },
+      year_model_year_: 2000,
+    },
+  ],
+  total: 4,
+  page: 1,
+  size: 10,
+  pages: 1,
+};

@@ -1,4 +1,5 @@
 from typing import List, Dict, Union
+
 from pydantic import (
     Field,
     BaseModel,
@@ -109,6 +110,7 @@ class StockBase(BaseModel):
     vehicle_uid: str
 
     badge: Union[str, None] = None
+    version: Union[str, None] = None
 
     motor_type: str
     displacement: Union[int, None] = None
@@ -123,7 +125,7 @@ class StockBase(BaseModel):
 
 
 class StockCreate(StockBase):
-    version: Union[str, None]
+    pass
 
 
 class Stock(StockBase):

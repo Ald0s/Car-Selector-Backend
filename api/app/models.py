@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column, declared_attr
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy, AssociationProxy
 
-from app import config
+from . import config
 
 # Create a new engine. Check same thread only required for SQLite, not other databases.
 engine = create_engine(config.SQLALCHEMY_DATABASE_URI,

@@ -11,8 +11,8 @@ from pydantic import (
 from sqlalchemy import select
 from sqlalchemy.orm import Session, Query
 
-from app import config, models
-from app.schemas import *
+from . import config, models
+from .schemas import *
 
 LOG = logging.getLogger("carselector.routes")
 LOG.setLevel(logging.DEBUG)

@@ -6,7 +6,7 @@ from typing import Tuple
 from fastapi import FastAPI
 from sqlalchemy.orm import Session
 
-from app import config, vehicles, models, schemas
+from ..app import config, vehicles, models, schemas
 
 
 class TestVehicleArgsModel():

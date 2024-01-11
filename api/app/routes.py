@@ -4,8 +4,8 @@ from fastapi import APIRouter, Query
 from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 
-from app import config, vehicles, schemas
-from app.dependencies import (
+from . import config, vehicles, schemas
+from .dependencies import (
     DatabaseSessionDep
 )
 

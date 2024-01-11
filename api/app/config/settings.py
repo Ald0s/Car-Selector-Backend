@@ -26,11 +26,6 @@ class BaseConfig():
         "check_same_thread": False}
     SQLALCHEMY_POOLCLASS = StaticPool
 
-    # The default number per page in pagination.
-    DEFAULT_NUM_PER_PAGE = 10
-    # The maximum allowed number per page in pagination.
-    MAX_NUM_PER_PAGE = 10
-
     def __init__(self):
         make_dir(self.IMPORT_PATH)
 
@@ -43,8 +38,10 @@ class TestConfig(BaseConfig):
     TESTING = True
     DEBUG = True
 
-    def __init__(self):
-        super().__init__()
+    # The default number per page in pagination.
+    DEFAULT_NUM_PER_PAGE = 10
+    # The maximum allowed number per page in pagination.
+    MAX_NUM_PER_PAGE = 10
 
 
 class DevelopmentConfig(BaseConfig):

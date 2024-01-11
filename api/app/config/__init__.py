@@ -1,4 +1,4 @@
-"""Still using this class, haha.
+"""Still using this module, haha.
 https://www.toptal.com/flask/flask-production-recipes"""
 
 import os
@@ -10,7 +10,12 @@ from . import settings
 
 # create settings object corresponding to specified env
 APP_ENV = os.environ.get("APP_ENV", "Development")
-_current = getattr(sys.modules["app.config.settings"], "{0}Config".format(APP_ENV))()
+try:
+    _current = getattr(sys.modules["app.config.settings"], "{0}Config".format(APP_ENV))()
+except KeyError as ke:
+    _current = getattr(sys.modules["api.app.config.settings"], "{0}Config".format(APP_ENV))()
+except Exception as e:
+    raise NotImplementedError
 
 
 if APP_ENV == "Production":
