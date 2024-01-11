@@ -1,10 +1,16 @@
-import threading
-import os
-import asyncio
+from app import create_app, config, vehicles
+from app.models import init_database, SessionLocal
 
-from base import app
 
-if __name__ == "__main__":
-    print("Flask server starting ...")
-    app.run(host = "0.0.0.0", debug = True, use_reloader = True)
-    
+with SessionLocal() as sesh:
+    # Initialise models on database.
+    init_database(sesh)
+    try:
+        # Import vehicle data.
+        vehicles.load_vehicles_from_file(sesh, "vehicles.json")
+        # Commit this data.
+        sesh.commit()
+    except Exception as e:
+        pass
+
+application = create_app()

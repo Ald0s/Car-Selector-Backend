@@ -1,15 +1,26 @@
+# Ignore these dirs.
+private/
+docs/
+
 # Useless directories
 venv/
 __pycache__/
+*egg-info/
 
-# Private dirs
-/instance/
+# Private files.
+.env
 
-# Database
+# Database.
 *.db
 
 # Compiled python files
 *.pyc
 
-# Other
-runserver.bat
+# Batch & script files.
+*.bat
+
+# Log files
+*.log
+
+# Pipfile.
+Pipfile.lock
