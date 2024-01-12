@@ -1,22 +1,26 @@
 # Vehicle Selector
-![Selector](/meta/selector.png)
 
 A (hopefully) modern example of a car selector system; one that you'd expect to find on car sale site. Originally built on Flask, I have reworked the application to now use FastAPI. We're still using SQLAlchemy, but in the 2.0 dialect! For the frontend, the application now uses a NextJS (ReactJS) frontend to fetch data from our server and display it appropriately.
 
-The data source for vehicles has also drastically changed; with features now down to a vehicle's optionable specifics. The full dataset is both absolutely huge, and was a real pain for me to assemble; so I'll only be releasing a snippet of the total set. Find this snippet [here](api/import/vehicles.json).
+![Selector](/meta/selector.png)
 
-## This set contains the following information:
-* ## Toyota
-  * ### 86
-  * ### Chaser
-  * ### MR2
-  * ### Supra
-* ## Mazda
-  * ### 6
-  * ### MX-5
-  * ### RX-7
 
-All year models and possible options are included for these models.
+## Vehicles Dataset
+The dataset being used for vehicles has also drastically changed; with features now down to a vehicle's optionable specifics for their specific year models. The full dataset is both absolutely huge, and took a lot of work to assemble; so I'll only be releasing a snippet of the total set. Find this [here](api/import/vehicles.json). Here's a quick summary of the dataset's general structure, as well as a brief idea on what kind of data is available.
+
+![JSON](/meta/json.png)
+
+
+### This set contains all options for all year models in the following models:
+* ### Toyota
+  * #### 86
+  * #### Chaser
+  * #### MR2
+  * #### Supra
+* ### Mazda
+  * #### 6
+  * #### MX-5
+  * #### RX-7
 
 
 ## Installation
@@ -45,7 +49,7 @@ http://localhost:3000/
 
 ```
 
-### Python packages
+## Python packages
 * fastapi
 * sqlalchemy
 * uvicorn[standard]
@@ -53,5 +57,5 @@ http://localhost:3000/
 * httpx
 * fastapi-pagination
 
-### Authors
+## Authors
 * **Alden Viljoen**
