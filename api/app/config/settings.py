@@ -3,40 +3,42 @@ import os
 from sqlalchemy.pool import StaticPool
 
 
-class BaseConfig():
-    """TODO: convert to use BaseSettings."""
-    TESTING: bool = False
-    DEBUG: bool = False
-
-    SQLALCHEMY_SESSION_OPTS = {}
-    SQLALCHEMY_ENGINE_OPTS = {}
-    SQLALCHEMY_CONNECT_ARGS = {}
+class BaseConfig:
+    DEBUG = False
+    TESTING = False
+    
     SQLALCHEMY_POOLCLASS = None
-    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    
+    # Set to any value to serve media through nginx.
+    USING_NGINX = None
 
-    PROJECT_NAME: str = "Car-Selector-Backend"
+    # Set either the following URI or...
+    SQLALCHEMY_DATABASE_URI = None
 
-    MAX_CONTENT_LENGTH: int = 16 * 1024 * 1024 # 16 MB
-    STREAM_CHUNK_SZ: int = 10 * 1024 * 1024 # 10 MB
+    # You may also set each of these.
+    DB_HOST = None
+    DB_USER = None
+    DB_PASSWORD = None
+    DB_DATABASE = None
+    DB_ADAPTER = "mysql+aiomysql"
 
-    IMPORT_PATH: str = "import"
+    # The project's name.
+    PROJECT_NAME: str = "Car Selector"
+    # Current version.
+    VERSION: str = "0.0.1"
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
-    SQLALCHEMY_CONNECT_ARGS = {
-        "check_same_thread": False}
-    SQLALCHEMY_POOLCLASS = StaticPool
-
-    def __init__(self):
-        make_dir(self.IMPORT_PATH)
+    # Directory to where we'll store content that can be requested.
+    CONTENT_DIRECTORY = None
+    # Directory to where we store master data.
+    MASTER_DIRECTORY = None
 
 
 class TestConfig(BaseConfig):
-    FLASK_ENV = "development"
-    FLASK_DEBUG = True
+    DEBUG = True
+    TESTING = True
     PRESERVE_CONTEXT_ON_EXCEPTION = False
 
-    TESTING = True
-    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
 
     # The default number per page in pagination.
     DEFAULT_NUM_PER_PAGE = 10
@@ -45,8 +47,7 @@ class TestConfig(BaseConfig):
 
 
 class DevelopmentConfig(BaseConfig):
-    FLASK_ENV = "development"
-    FLASK_DEBUG = True
+    TESTING = False
     DEBUG = True
 
     # The default number per page in pagination.
@@ -56,16 +57,7 @@ class DevelopmentConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    FLASK_ENV = "production"
-
     # The default number per page in pagination.
     DEFAULT_NUM_PER_PAGE = 25
     # The maximum allowed number per page in pagination.
     MAX_NUM_PER_PAGE = 25
-
-
-def make_dir(path):
-    try:
-        os.makedirs(os.path.join(os.getcwd(), path))
-    except OSError as o:
-        pass

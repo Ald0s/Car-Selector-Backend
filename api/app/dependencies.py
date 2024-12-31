@@ -1,20 +1,11 @@
+"""Define various dependencies for use across the application."""
 from typing import Annotated
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from . import config, models
+from app.database import get_session
 
 
-def get_session() -> Session:
-    """A generator that will yield database sessions."""
-    # Create a new session.
-    sesh = models.SessionLocal()
-    try:
-        # Yield the session.
-        yield sesh
-    finally:
-        # Always close the session after use.
-        sesh.close()
-# Define a shared dependency here so we can just use this everywhere.
-DatabaseSessionDep = Annotated[Session, Depends(get_session)]
+# Define a dependency that will inject a started database session.
+Sesh = Annotated[AsyncSession, Depends(get_session)]

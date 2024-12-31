@@ -1,0 +1,66 @@
+services:
+  database:
+    container_name: database
+    build: 
+      context: ./database/
+      dockerfile: Dockerfile
+    secrets:
+      - db_password
+      - db_root_password
+    environment:
+      MYSQL_USER: csbadmin
+      MYSQL_PASSWORD: /run/secrets/db_password
+      MYSQL_DATABASE: csb
+      MYSQL_ROOT_PASSWORD: /run/secrets/db_root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/instance/:/var/lib/mysql/ # map mysql data directory to 'instance' inside database
+  
+  api:
+    container_name: api
+    depends_on:
+      - database
+    build: 
+      context: ./api/
+      dockerfile: Dockerfile
+    secrets:
+      - db_password
+    environment:
+      APP_ENV: Development # set application environment here
+      USING_NGINX: 1 # 1 will use X-Accel-Redirect to serve content
+      DB_HOST: database # providing database service's name
+      DB_USER: csbadmin
+      DB_PASSWORD: /run/secrets/db_password
+      DB_DATABASE: csb
+      MASTER_DIRECTORY: /var/csb/master/
+      CONTENT_DIRECTORY: /var/csb/content/
+    volumes:
+      - ./data/content/:/var/csb/content/ # map a content directory, where we'll keep vehicle logos.
+      - ./data/master/:/var/csb/master/ # map the master data directory, find this in ./data/master
+      - ./api/instance/logs/:/var/log/csb/ # find logs in ./api/instance/logs/
+  
+  frontend:
+    container_name: frontend
+    depends_on:
+      - api
+    build: 
+      context: ./frontend/
+      dockerfile: Dockerfile
+    environment:
+      DOMAIN: default_server
+      UPSTREAM_SERVER: api
+      UPSTREAM_PORT: 8081
+      CONTENT_DIRECTORY: /var/csb/content/
+      ACCESS_LOG: /var/log/nginx/access.log
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/content/:/var/csb/content/ # map a content directory, where we'll keep vehicle logos.
+      - ./frontend/instance/logs/:/var/log/nginx/
+
+secrets:
+  db_password:
+    file: ./database/secrets/db_password.txt # you MUST set a password inside this file.
+  db_root_password:
+    file: ./database/secrets/db_root_password.txt # you MUST set a password inside this file.

@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from ..app import create_app, dependencies, vehicles
+'''from ..app import create_app, dependencies, vehicles
 from ..app.models import SessionLocal, init_database
 
 
@@ -44,3 +44,4 @@ def client(test_app: FastAPI) -> Generator[TestClient, None, None]:
     with TestClient(test_app) as c:
         # Yield this client.
         yield c
+'''

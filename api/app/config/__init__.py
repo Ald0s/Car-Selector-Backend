@@ -1,39 +1,37 @@
-"""Still using this module, haha.
-https://www.toptal.com/flask/flask-production-recipes"""
-
 import os
 import sys
-import logging
+
+from dotenv import load_dotenv
 
 from . import settings
 
+# Get the app environment, by default use Development.
+APP_ENV = os.getenv('APP_ENV', 'Development')
 
-# create settings object corresponding to specified env
-APP_ENV = os.environ.get("APP_ENV", "Development")
+# For app environment, get the matching configuration class from settings.
 try:
-    _current = getattr(sys.modules["app.config.settings"], "{0}Config".format(APP_ENV))()
-except KeyError as ke:
-    _current = getattr(sys.modules["api.app.config.settings"], "{0}Config".format(APP_ENV))()
-except Exception as e:
-    raise NotImplementedError
-
-
-if APP_ENV == "Production":
-    logging.basicConfig( level = logging.INFO )
-
-elif APP_ENV == "Test" or APP_ENV == "Development":
-    logging.basicConfig( level = logging.DEBUG )
+    # Get the current configuration.
+    _current_config = settings.__dict__[f"{APP_ENV}Config"]
+except AttributeError as ae:
+    # This configuration doesn't exist. Fallback to development and report
+    # the issue.
+    print(f"WARNING! While loading settings for module {__name__}, we were" \
+          " unable to locate the desired environment; '{APP_ENV}', fallback" \
+          " to Development.")
+    try:
+        _current_config = settings.__dict__[f"DevelopmentConfig"]
+    except AttributeError as ae2:
+        # Just give up, mate.
+        raise NotImplementedError
 
 # copy attributes to the module for convenience
-for atr in [f for f in dir(_current) if not "__" in f]:
-    # environment can override anything
-    val = os.environ.get(atr, getattr(_current, atr))
+for atr in [f for f in dir(_current_config) if not "__" in f]:
+    # Load .env settings.
+    load_dotenv()
+    # environment can override anything, as long as it is not Test; in which
+    # settings configuration takes priority.
+    if APP_ENV == "Test":
+        val = getattr(_current_config, atr) or os.environ.get(atr, None)
+    else:
+        val = os.environ.get(atr, getattr(_current_config, atr))
     setattr(sys.modules[__name__], atr, val)
-
-
-def as_dict():
-    res = {}
-    for atr in [f for f in dir(_current) if not "__" in f]:
-        val = getattr(_current, atr)
-        res[atr] = val
-    return res

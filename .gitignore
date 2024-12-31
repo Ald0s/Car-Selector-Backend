@@ -1,8 +1,23 @@
+.pytest_cache/
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Ignore these dirs.
 private/
 docs/
+secrets/
+instance/
+node_modules/
+build/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Useless directories
 venv/
@@ -11,6 +26,10 @@ __pycache__/
 
 # Private files.
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Database.
 *.db
