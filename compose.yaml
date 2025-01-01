@@ -9,9 +9,9 @@ services:
       - db_root_password
     environment:
       MYSQL_USER: csbadmin
-      MYSQL_PASSWORD: /run/secrets/db_password
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
       MYSQL_DATABASE: csb
-      MYSQL_ROOT_PASSWORD: /run/secrets/db_root_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
     ports:
       - "3306:3306"
     volumes:
@@ -31,7 +31,7 @@ services:
       USING_NGINX: 1 # 1 will use X-Accel-Redirect to serve content
       DB_HOST: database # providing database service's name
       DB_USER: csbadmin
-      DB_PASSWORD: /run/secrets/db_password
+      DB_PASSWORD_FILE: /run/secrets/db_password
       DB_DATABASE: csb
       MASTER_DIRECTORY: /var/csb/master/
       CONTENT_DIRECTORY: /var/csb/content/

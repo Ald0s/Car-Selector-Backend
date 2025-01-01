@@ -33,5 +33,13 @@ for atr in [f for f in dir(_current_config) if not "__" in f]:
     if APP_ENV == "Test":
         val = getattr(_current_config, atr) or os.environ.get(atr, None)
     else:
-        val = os.environ.get(atr, getattr(_current_config, atr))
+        # attempt to get as a secret.
+        val_from_secrets = os.environ.get("%s_FILE" % atr, None)
+        if val_from_secrets is not None:
+            # we have the value from secrets. read the value of that and set it to val.
+            with open(val_from_secrets, "r") as r:
+                val = r.read()
+        else:
+            # attempt get as-is from environ.
+            val = os.environ.get(atr, getattr(_current_config, atr))
     setattr(sys.modules[__name__], atr, val)
